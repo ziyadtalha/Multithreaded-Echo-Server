@@ -1,4 +1,4 @@
-Multithreaded Echo Server and a simple CLient.
+Multithreaded Echo Server and a simple Client.
 
 Written in C language using TCP socket programming.
 
