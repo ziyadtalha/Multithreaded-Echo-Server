@@ -1,8 +1,3 @@
-/*
-        TCP_Server. This Program will will create the Server side for TCP_Socket Programming.
-        It will receive the data from the client and then send the same data back to client.
-*/
-
 #include <stdio.h>
 #include <string.h>
 #include <sys/socket.h> //socket
@@ -70,7 +65,7 @@ void *server_thread (void *args)
 
 	clientCount--;
 
-	return NULL;
+	pthread_exit(NULL);
 }
 
 int main(void)
@@ -111,7 +106,7 @@ int main(void)
 	printf("Bind Done\n");
 
 
-	while(1)
+	while(1 == 1)
 	{
 		//Put the socket into Listening State
 
@@ -149,7 +144,6 @@ int main(void)
 			memset(server_message,'\0',sizeof(server_message));
 			memset(client_message,'\0',sizeof(client_message));
 
-			//pthread_join(threads[clientCount], NULL);
 		}
 
 		else

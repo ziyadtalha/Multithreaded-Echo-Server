@@ -1,9 +1,3 @@
-/*
-        TCP_Client. This Program will implement the Client Side for TCP_Socket Programming.
-        It will get some data from user and will send to the server and as a reply from the
-        server, it will get its data back.
-*/
-
 #include <stdio.h>
 #include <string.h>
 #include <sys/socket.h> //socket
@@ -16,12 +10,10 @@ int main(void)
         char server_message[2000], client_message[2000];
 
         //Cleaning the Buffers
-
         memset(server_message,'\0',sizeof(server_message));
         memset(client_message,'\0',sizeof(client_message));
 
         //Creating Socket
-
         socket_desc = socket(AF_INET, SOCK_STREAM, 0);
 
         if(socket_desc < 0)
@@ -58,7 +50,15 @@ int main(void)
 
 		if((strcmp(client_message,"DISCONNECT") == 0) || (strcmp(client_message,"disconnect") == 0))
 		{
-			connectionFlag = 0;
+
+                        //Send the message to Server
+                        if(send(socket_desc, client_message, strlen(client_message),0) < 0)
+                        {
+                                printf("Send Failed. Error!!!!\n");
+                                return -1;
+                        }
+
+                        connectionFlag = 0;
 		}
 
 		else
@@ -71,7 +71,6 @@ int main(void)
 			}
 
 			//Receive the message back from the server
-
 			if(recv(socket_desc, server_message, sizeof(server_message),0) < 0)
 			{
 				printf("Receive Failed. Error!!!!!\n");
@@ -92,7 +91,6 @@ int main(void)
 	}
 
         //Closing the Socket
-
         close(socket_desc);
 
         return 0;
